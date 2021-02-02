@@ -8,7 +8,7 @@ pipeline {
             }
             steps {
                 echo 'Building C# Code'
-                dotnet build
+                sh 'dotnet build'
             }
         }
         stage('Run C# Tests') {
@@ -17,7 +17,7 @@ pipeline {
             }
             steps {
                 echo 'Running C# Tests'
-                dotnet test
+                sh 'dotnet test'
             }
         }
         stage('Install Node Dependencies') {
@@ -27,7 +27,7 @@ pipeline {
             steps {
                 echo 'Installing Node Dependencies'
                 dir('./DotnetTemplate.Web') {
-                    npm install
+                    sh 'npm install'
                 }
             }
         }
@@ -38,7 +38,7 @@ pipeline {
             steps {
                 echo 'Building Typescript Code'
                 dir('./DotnetTemplate.Web') {
-                    npm run build
+                    sh 'npm run build'
                 }
             }
         }
@@ -49,7 +49,7 @@ pipeline {
             steps {
                 echo 'Running the Linter for the Typescript Code'
                 dir('./DotnetTemplate.Web') {
-                    npm run lint
+                    sh 'npm run lint'
                 }
             }
         }
@@ -60,7 +60,7 @@ pipeline {
             steps {
                 echo 'Running Typescript Tests'
                 dir('./DotnetTemplate.Web') {
-                    npm t
+                    sh 'npm t'
                 }
             }
         }
