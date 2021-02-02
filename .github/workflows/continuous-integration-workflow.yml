@@ -10,26 +10,17 @@ jobs:
 
     - name: Build C# Code # name of step
     run: dotnet build
-
     - name: Run C# Tests
     run: dotnet test
-
     - name: Install Node Dependencies
     run: npm install
     working-directory: ./DotnetTemplate.Web
-
     - name: Build Typescript Code
     run: npm run build
     working-directory: ./DotnetTemplate.Web
-
     - name: Run eslint Linter on Typescript Code
     run: npm run lint
     working-directory: ./DotnetTemplate.Web
-
     - name: Run Typescript Tests
     run: npm t
     working-directory: ./DotnetTemplate.Web
-
-
-    - name: 
-    run: echo 'Hello World' # command to run
