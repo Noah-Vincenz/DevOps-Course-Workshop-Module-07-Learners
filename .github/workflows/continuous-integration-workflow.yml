@@ -9,18 +9,18 @@ jobs:
     - uses: actions/checkout@v2 # adds a step to checkout the repository code
 
     - name: Build C# Code # name of step
-    run: dotnet build
+      run: dotnet build
     - name: Run C# Tests
-    run: dotnet test
+      run: dotnet test
     - name: Install Node Dependencies
-    run: npm install
-    working-directory: ./DotnetTemplate.Web
+      run: npm install
+      working-directory: ./DotnetTemplate.Web
     - name: Build Typescript Code
-    run: npm run build
-    working-directory: ./DotnetTemplate.Web
+      run: npm run build
+      working-directory: ./DotnetTemplate.Web
     - name: Run eslint Linter on Typescript Code
-    run: npm run lint
-    working-directory: ./DotnetTemplate.Web
+      run: npm run lint
+      working-directory: ./DotnetTemplate.Web
     - name: Run Typescript Tests
-    run: npm t
-    working-directory: ./DotnetTemplate.Web
+      run: npm t
+      working-directory: ./DotnetTemplate.Web
