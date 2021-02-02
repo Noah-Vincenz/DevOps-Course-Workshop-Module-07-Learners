@@ -28,3 +28,8 @@ jobs:
     - name: Run Typescript Tests
       run: npm t
       working-directory: ./DotnetTemplate.Web
+
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      env: 
+        SLACK_WEBHOOK: https://hooks.slack.com/services/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
