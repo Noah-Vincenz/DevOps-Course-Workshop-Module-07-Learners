@@ -3,20 +3,20 @@ pipeline {
 
     stages {
         stage('C#') {
-            agent {
-                docker { image 'mcr.microsoft.com/dotnet/sdk:5.0' }
-            }
+            // agent {
+            //     docker { image 'mcr.microsoft.com/dotnet/sdk:5.0' }
+            // }
             stages {
                 stage('Build C# Code') {
                     steps {
                         echo 'Building C# Code'
-                        sh 'dotnet build'
+                        // sh 'dotnet build'
                     }
                 }
                 stage('Run C# Tests') {
                     steps {
                         echo 'Running C# Tests'
-                        sh 'dotnet test'
+                        // sh 'dotnet test'
                     }
                 }
             }
