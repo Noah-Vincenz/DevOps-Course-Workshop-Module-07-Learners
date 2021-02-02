@@ -1,0 +1,9 @@
+name: Continuous Integration
+on: [push] # Will make the workflow run every time you push to any branch
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest # sets the build environment a machine with the latest Ubuntu installed
+    steps:
+    - uses: actions/checkout@v2 # adds a step to checkout the repository code
