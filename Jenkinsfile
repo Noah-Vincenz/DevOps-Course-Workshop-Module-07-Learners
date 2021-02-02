@@ -1,7 +1,9 @@
 pipeline {
     agent { 
-        docker { image 'node:14-alpine' }
-        docker { iamge 'microsoft/dotnet:3.1-sdk' }
+        docker { 
+            image 'node:14-alpine',
+            image 'microsoft/dotnet:3.1-sdk'
+        }
     }
 
     stages {
