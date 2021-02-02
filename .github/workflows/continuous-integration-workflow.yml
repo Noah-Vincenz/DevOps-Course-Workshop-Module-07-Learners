@@ -28,8 +28,27 @@ jobs:
     - name: Run Typescript Tests
       run: npm t
       working-directory: ./DotnetTemplate.Web
+    
+    - name: Slack Notification Success
+      uses: craftech-io/slack-action@v1
+      with: 
+        slack_webhook_url: https://hooks.slack.com/services/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
+        slack_channel: devops-workshop-7
+        status: success
+      if: success()
 
-    - name: Slack Notification
-      uses: rtCamp/action-slack-notify@v2
-      env: 
-        SLACK_WEBHOOK: https://hooks.slack.com/services/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
+    - name: Slack Notification Failure
+      uses: craftech-io/slack-action@v1
+      with: 
+        slack_webhook_url: https://hooks.slack.com/services/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
+        slack_channel: devops-workshop-7
+        status: failure
+      if: failure()
+
+    - name: Slack Notification Cancelled
+      uses: craftech-io/slack-action@v1
+      with: 
+        slack_webhook_url: https://hooks.slack.com/services/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
+        slack_channel: devops-workshop-7
+        status: cancelled
+      if: cancelled()
