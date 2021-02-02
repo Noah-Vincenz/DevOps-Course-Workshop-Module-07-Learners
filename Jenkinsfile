@@ -3,16 +3,20 @@ pipeline {
 
     stages {
         stage('Build C# Code') {
+            agent {
+                docker { image 'mcr.microsoft.com/dotnet/core/sdk:3.1' }
+            }
             steps {
                 echo 'Building C# Code'
-                sh './dotnet-install.sh -c Current'
                 sh 'dotnet build'
             }
         }
         stage('Run C# Tests') {
+            agent {
+                docker { image 'mcr.microsoft.com/dotnet/core/sdk:3.1' }
+            }
             steps {
                 echo 'Running C# Tests'
-                sh './dotnet-install.sh -c Current'
                 sh 'dotnet test'
             }
         }
@@ -38,7 +42,7 @@ pipeline {
                 }
             }
         }
-        stage('Run Linter for the Typescript Code') {
+        stage('Run Linter for Typescript') {
             agent { 
                 docker { image 'node:14-alpine' }
             }
