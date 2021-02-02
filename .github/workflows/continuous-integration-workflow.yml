@@ -32,7 +32,7 @@ jobs:
     - name: Slack Notification Success
       uses: craftech-io/slack-action@v1
       with: 
-        slack_webhook_url: https://hooks.slack.com/services/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
+        slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
         slack_channel: devops-workshop-7
         status: success
       if: success()
@@ -40,7 +40,7 @@ jobs:
     - name: Slack Notification Failure
       uses: craftech-io/slack-action@v1
       with: 
-        slack_webhook_url: https://hooks.slack.com/services/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
+        slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
         slack_channel: devops-workshop-7
         status: failure
       if: failure()
@@ -48,7 +48,7 @@ jobs:
     - name: Slack Notification Cancelled
       uses: craftech-io/slack-action@v1
       with: 
-        slack_webhook_url: https://hooks.slack.com/services/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
+        slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
         slack_channel: devops-workshop-7
         status: cancelled
       if: cancelled()
