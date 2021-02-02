@@ -3,65 +3,60 @@ pipeline {
 
     stages {
         stage('C#') {
-            // agent {
-            //     docker { image 'mcr.microsoft.com/dotnet/sdk:5.0' }
-            // }
+            agent {
+                docker { image 'mcr.microsoft.com/dotnet/sdk:5.0' args '-e DOTNET_CLI_HOME="/tmp/DOTNET_CLI_HOME"' }
+            }
             stages {
                 stage('Build C# Code') {
                     steps {
                         echo 'Building C# Code'
-                        // sh 'dotnet build'
+                        sh 'dotnet build'
                     }
                 }
                 stage('Run C# Tests') {
                     steps {
                         echo 'Running C# Tests'
-                        // sh 'dotnet test'
+                        sh 'dotnet test'
                     }
                 }
             }
         }
-        stage('Install Node Dependencies') {
+        stage('Typescript') {
             agent { 
                 docker { image 'node:14-alpine' }
             }
-            steps {
-                echo 'Installing Node Dependencies'
-                dir('./DotnetTemplate.Web') {
-                    sh 'npm install'
+            stages {
+                stage('Install Node Dependencies') {
+                    steps {
+                        echo 'Installing Node Dependencies'
+                        dir('./DotnetTemplate.Web') {
+                            sh 'npm install'
+                        }
+                    }
                 }
-            }
-        }
-        stage('Build Typescript Code') {
-            agent { 
-                docker { image 'node:14-alpine' }
-            }
-            steps {
-                echo 'Building Typescript Code'
-                dir('./DotnetTemplate.Web') {
-                    sh 'npm run build'
+                stage('Build Typescript Code') {
+                    steps {
+                        echo 'Building Typescript Code'
+                        dir('./DotnetTemplate.Web') {
+                            sh 'npm run build'
+                        }
+                    }
                 }
-            }
-        }
-        stage('Run Linter for Typescript') {
-            agent { 
-                docker { image 'node:14-alpine' }
-            }
-            steps {
-                echo 'Running the Linter for the Typescript Code'
-                dir('./DotnetTemplate.Web') {
-                    sh 'npm run lint'
+                stage('Run Linter for Typescript') {
+                    steps {
+                        echo 'Running the Linter for the Typescript Code'
+                        dir('./DotnetTemplate.Web') {
+                            sh 'npm run lint'
+                        }
+                    }
                 }
-            }
-        }
-        stage('Run Typescript Tests') {
-            agent { 
-                docker { image 'node:14-alpine' }
-            }
-            steps {
-                echo 'Running Typescript Tests'
-                dir('./DotnetTemplate.Web') {
-                    sh 'npm t'
+                stage('Run Typescript Tests') {
+                    steps {
+                        echo 'Running Typescript Tests'
+                        dir('./DotnetTemplate.Web') {
+                            sh 'npm t'
+                        }
+                    }
                 }
             }
         }
