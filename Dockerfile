@@ -9,5 +9,6 @@ RUN add-apt-repository \
 	"deb [arch=amd64] https://download.docker.com/linux/debian \
 	$(lsb_release -cs) stable"
 RUN apt-get update && apt-get install -y docker-ce-cli
+RUN usermod -a -G root jenkins
 USER jenkins
 RUN jenkins-plugin-cli --plugins blueocean:1.24.4
