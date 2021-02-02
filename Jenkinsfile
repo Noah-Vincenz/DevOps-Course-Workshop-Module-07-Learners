@@ -2,7 +2,7 @@ pipeline {
     agent none
 
     stages {
-        stage() {
+        stage('C#') {
             agent {
                 docker { image 'mcr.microsoft.com/dotnet/sdk:5.0' }
             }
