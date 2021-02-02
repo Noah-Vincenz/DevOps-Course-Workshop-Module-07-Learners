@@ -7,3 +7,29 @@ jobs:
     runs-on: ubuntu-latest # sets the build environment a machine with the latest Ubuntu installed
     steps:
     - uses: actions/checkout@v2 # adds a step to checkout the repository code
+
+    - name: Build C# Code # name of step
+    run: dotnet build
+
+    - name: Run C# Tests
+    run: dotnet test
+
+    - name: Install Node Dependencies
+    run: npm install
+    working-directory: ./DotnetTemplate.Web
+
+    - name: Build Typescript Code
+    run: npm run build
+    working-directory: ./DotnetTemplate.Web
+
+    - name: Run eslint Linter on Typescript Code
+    run: npm run lint
+    working-directory: ./DotnetTemplate.Web
+
+    - name: Run Typescript Tests
+    run: npm t
+    working-directory: ./DotnetTemplate.Web
+
+
+    - name: 
+    run: echo 'Hello World' # command to run
