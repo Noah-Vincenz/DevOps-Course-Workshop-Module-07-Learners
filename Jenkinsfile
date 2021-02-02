@@ -2,22 +2,23 @@ pipeline {
     agent none
 
     stages {
-        stage('Build C# Code') {
+        stage() {
             agent {
-                docker { image 'mcr.microsoft.com/dotnet/core/sdk:3.1' }
+                docker { image 'mcr.microsoft.com/dotnet/sdk:5.0' }
             }
-            steps {
-                echo 'Building C# Code'
-                sh 'dotnet build'
-            }
-        }
-        stage('Run C# Tests') {
-            agent {
-                docker { image 'mcr.microsoft.com/dotnet/core/sdk:3.1' }
-            }
-            steps {
-                echo 'Running C# Tests'
-                sh 'dotnet test'
+            stages {
+                stage('Build C# Code') {
+                    steps {
+                        echo 'Building C# Code'
+                        sh 'dotnet build'
+                    }
+                }
+                stage('Run C# Tests') {
+                    steps {
+                        echo 'Running C# Tests'
+                        sh 'dotnet test'
+                    }
+                }
             }
         }
         stage('Install Node Dependencies') {
