@@ -18,5 +18,6 @@ RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers \
       && printf '#!/bin/bash\nsudo /usr/bin/docker "$@"' > /usr/local/bin/docker \
       && chmod +x /usr/local/bin/docker
 RUN usermod -a -G root jenkins
+RUN chmod a+rw /var/run/docker.sock
 USER jenkins
 RUN jenkins-plugin-cli --plugins blueocean:1.24.4
