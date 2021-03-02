@@ -68,3 +68,15 @@ jobs:
         tag_with_ref: true
         tag_with_sha: true
         tags: "latest" 
+
+  heroku:
+    name: Heroku Deploy
+    needs: docker
+    runs-on: ubuntu-latest # sets the build environment a machine with the latest Ubuntu installed
+    steps:
+    - uses: actions/checkout@v2
+    - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_KEY}}
+        heroku_app_name: "devops-workshop-8"
+        heroku_email: ${{secrets.EMAIL}} 
