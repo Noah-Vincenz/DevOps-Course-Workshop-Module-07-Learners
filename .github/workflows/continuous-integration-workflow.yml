@@ -52,7 +52,13 @@ jobs:
         slack_channel: devops-workshop-7
         status: cancelled
       if: cancelled()
-    
+
+  docker: 
+    name: Docker Hub Push
+    needs: build
+    runs-on: ubuntu-latest # sets the build environment a machine with the latest Ubuntu installed
+    steps:
+    - uses: actions/checkout@v2
     - name: Build and Push to Docker Hub
       uses: docker/build-push-action@v1
       with:
