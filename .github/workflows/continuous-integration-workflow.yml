@@ -1,0 +1,54 @@
+name: Continuous Integration
+on: 
+  push:
+    branches: main # Will make the workflow run every time you push to main branch
+  pull_request:
+    branches: main # Will make the workflow run every time you make a PR to main branch
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest # sets the build environment a machine with the latest Ubuntu installed
+    steps:
+    - uses: actions/checkout@v2 # adds a step to checkout the repository code
+
+    - name: Build C# Code # name of step
+      run: dotnet build
+    - name: Run C# Tests
+      run: dotnet test
+    - name: Install Node Dependencies
+      run: npm install
+      working-directory: ./DotnetTemplate.Web
+    - name: Build Typescript Code
+      run: npm run build
+      working-directory: ./DotnetTemplate.Web
+    - name: Run eslint Linter on Typescript Code
+      run: npm run lint
+      working-directory: ./DotnetTemplate.Web
+    - name: Run Typescript Tests
+      run: npm t
+      working-directory: ./DotnetTemplate.Web
+    
+    - name: Slack Notification Success
+      uses: craftech-io/slack-action@v1
+      with: 
+        slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        slack_channel: devops-workshop-7
+        status: success
+      if: success()
+
+    - name: Slack Notification Failure
+      uses: craftech-io/slack-action@v1
+      with: 
+        slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        slack_channel: devops-workshop-7
+        status: failure
+      if: failure()
+
+    - name: Slack Notification Cancelled
+      uses: craftech-io/slack-action@v1
+      with: 
+        slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        slack_channel: devops-workshop-7
+        status: cancelled
+      if: cancelled()

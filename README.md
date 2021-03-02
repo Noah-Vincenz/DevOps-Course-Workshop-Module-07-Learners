@@ -1,5 +1,7 @@
 # Workshop Module 07
 
+![Build And Test](https://github.com/Noah-Vincenz/DevOps-Course-Workshop-Module-07-Learners/workflows/Continuous%20Integration/badge.svg)
+
 This repository is for learners on Corndel's DevOps apprenticeship.
 
 Before the workshop you should complete all the set-up instructions in [before_you_start.md](./before_you_start.md).
