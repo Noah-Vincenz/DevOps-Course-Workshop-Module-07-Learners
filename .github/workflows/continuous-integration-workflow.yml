@@ -65,7 +65,7 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: nnoeh/dotnettemplate
-        tags: /refs/heads/main, latest
+        tag-sha: true
 
   heroku:
     name: Heroku Deploy
